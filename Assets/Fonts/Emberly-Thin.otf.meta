@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 18033d9cad9d77343b05afcd8370f714
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Emberly
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 90ceca46952395b4da52ade5b852869a, type: 3}
+  - {fileID: 12800000, guid: d252d88125cfd8b46b9a7a15ae441d2c, type: 3}
+  - {fileID: 12800000, guid: b315585c813b25a4fbf6b2936ef57b78, type: 3}
+  - {fileID: 12800000, guid: d0dec0c0c16801344bf82e594203e2af, type: 3}
+  - {fileID: 12800000, guid: 1701e4e1a2452b243873bc338cf13ea7, type: 3}
+  - {fileID: 12800000, guid: c691593bc083fc240b5496664a6c4bb2, type: 3}
+  - {fileID: 12800000, guid: 476028c2942dd5c4eaf3da475152eb55, type: 3}
+  - {fileID: 12800000, guid: 67dab849ef0c72c45bd4f224e94c375f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
