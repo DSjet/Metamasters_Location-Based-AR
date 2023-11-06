@@ -20,12 +20,17 @@ public class SpecificInputField : MonoBehaviour
     {
         if (inputType == InputType.Password)
         {
-            GetComponent<TMP_InputField>().contentType = TMP_InputField.ContentType.Password;
+            TMP_InputField inputField = GetComponent<TMP_InputField>();
+            inputField.contentType = TMP_InputField.ContentType.Password;
+            inputField.characterLimit = 20;
+            
         }
 
         if (inputType == InputType.Email)
         {
-            GetComponent<TMP_InputField>().contentType = TMP_InputField.ContentType.EmailAddress;
+            TMP_InputField inputField = GetComponent<TMP_InputField>();
+            inputField.contentType = TMP_InputField.ContentType.EmailAddress;
+            inputField.characterLimit = 40;
         }
         
     }
