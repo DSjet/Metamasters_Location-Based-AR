@@ -8,8 +8,18 @@ public class LocationPinInteractible : MonoBehaviour
     [SerializeField] private CollectibleItem collectibleItem;
     [SerializeField] float spawnForce;
     bool itemCollected = false;
+    UIManager uiManager;
 
     public CollectibleItem CollectibleItem {  get { return collectibleItem; } set { collectibleItem = value; } }
+
+    private void Start()
+    {
+        if (GameObject.FindWithTag("UI Manager") != null)
+        {
+            GameObject go = GameObject.FindWithTag("UI Manager");
+            uiManager = go.GetComponent<UIManager>();
+        }
+    }
 
     private void Update()
     {
@@ -45,6 +55,8 @@ public class LocationPinInteractible : MonoBehaviour
     IEnumerator SpawnObject()
     {
         yield return new WaitForSeconds(0.5f);
+
+        uiManager.IsArrived = true;
 
         Debug.Log("Item Spawned");
 

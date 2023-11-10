@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9ce2a1fc4d5894f8d5db50d4b3406b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectibleItem: {fileID: 4420345286808917067, guid: 97e709e1072ab654a8141d77f22cf4c8,
+  collectibleItem: {fileID: 8333349035982978561, guid: d6edf7a7fe83de5438c6bc6ae653f2de,
     type: 3}
   spawnForce: 30
 --- !u!1 &2406714923471210865
