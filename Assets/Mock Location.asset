@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Mock Location
   m_EditorClassIdentifier: 
   Location:
-    Latitude: -7.758568584066553
-    Longitude: 110.38049902237887
+    Latitude: -7.761019489699531
+    Longitude: 110.39427605396901
     Altitude: 0
     AltitudeMode: 0
     Label: 

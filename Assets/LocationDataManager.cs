@@ -23,6 +23,12 @@ namespace ARLocation.MapboxRoutes
         [SerializeField] Transform _locationPointContainer; // grid container 
         [SerializeField] GameObject _mapsUI;
         [SerializeField] LocationInfoUI _locationInfoUI;
+        [SerializeField] Mapbox.Unity.Map.AbstractMap Map;
+        [SerializeField] GameObject ARCamera;
+        [SerializeField] Material MinimapLineMaterial;
+        [SerializeField] Camera MapboxMapCamera;
+        [SerializeField] float MinimapStepSize = 0.5f;
+
 
         Location _placeOfInterest;
 
@@ -95,6 +101,72 @@ namespace ARLocation.MapboxRoutes
                             }));
             }
         }
+
+        private GameObject minimapRouteGo;
+        private RouteResponse currentResponse;
+
+        private void buildMinimapRoute(RouteResponse res)
+        {
+            var geo = res.routes[0].geometry;
+            var vertices = new List<Vector3>();
+            var indices = new List<int>();
+
+            var worldPositions = new List<Vector2>();
+
+            foreach (var p in geo.coordinates)
+            {
+                /* var pos = Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition(
+                        p.Latitude,
+                        p.Longitude,
+                        Map.CenterMercator,
+                        Map.WorldRelativeScale
+                        ); */
+
+                // Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition
+                var pos = Map.GeoToWorldPosition(new Mapbox.Utils.Vector2d(p.Latitude, p.Longitude), true);
+                worldPositions.Add(new Vector2(pos.x, pos.z));
+                // worldPositions.Add(new Vector2((float)pos.x, (float)pos.y));
+            }
+
+            if (minimapRouteGo != null)
+            {
+                minimapRouteGo.Destroy();
+            }
+
+            minimapRouteGo = new GameObject("minimap route game object");
+
+            var mesh = minimapRouteGo.AddComponent<MeshFilter>().mesh;
+
+            var lineWidth = 2 * Mathf.Pow(2.0f, Map.Zoom - 18);
+            LineBuilder.BuildLineMesh(worldPositions, mesh, lineWidth);
+
+            var meshRenderer = minimapRouteGo.AddComponent<MeshRenderer>();
+            meshRenderer.sharedMaterial = MinimapLineMaterial;
+        }
+        Vector3 lastCameraPos;
+        void Update()
+        {
+            var cameraPos = ARCamera.transform.position;
+
+            var arLocationRootAngle = ARLocationManager.Instance.gameObject.transform.localEulerAngles.y;
+            var cameraAngle = ARCamera.transform.localEulerAngles.y;
+            var mapAngle = cameraAngle - arLocationRootAngle;
+
+            MapboxMapCamera.transform.eulerAngles = new Vector3(90, mapAngle, 0);
+
+            if ((cameraPos - lastCameraPos).magnitude < MinimapStepSize)
+            {
+                return;
+            }
+
+            lastCameraPos = cameraPos;
+
+            var location = ARLocationManager.Instance.GetLocationForWorldPosition(ARCamera.transform.position);
+
+            Map.SetCenterLatitudeLongitude(new Mapbox.Utils.Vector2d(location.Latitude, location.Longitude));
+            Map.UpdateMap();
+        }
     }
 }
+
 
