@@ -120,6 +120,8 @@ namespace ARLocation.MapboxRoutes
         private MachineState state = new MachineState { Type = StateType.Hidden, HasArrow = false };
         private float arrowTime = 0;
         private float mapPinTime = 0;
+        private UIManager uiManager;
+        private float Timer = 0.2f;
 
         private float L0 => RoadSignSettings.FollowDistance;
         private float L1 => DirectionArrowSettings.DropDistance;
@@ -136,9 +138,20 @@ namespace ARLocation.MapboxRoutes
         private Transform signContainer => RoadSignSettings.Container;
         private Transform mapPinContainer => FinishSignSettings.Container;
 
+        private float prevDistance;
+
         // ================================================================================ //
         //  Monobehaviour Methods                                                           //
         // ================================================================================ //
+
+        private void Start()
+        {   
+            if (GameObject.FindWithTag("UI Manager") != null)
+            {
+                GameObject go = GameObject.FindWithTag("UI Manager");
+                uiManager = go.GetComponent<UIManager>();
+            }
+        }
 
         void OnValidate()
         {
@@ -163,9 +176,13 @@ namespace ARLocation.MapboxRoutes
             gameObject.SetActive(false);
         }
 
-        public override void OffCurrentTarget(SignPostEventArgs args) {}
+        public override void OffCurrentTarget(SignPostEventArgs args) {
+            uiManager.KeepDistance(prevDistance);
+        }
 
-        public override void OnCurrentTarget(SignPostEventArgs args) { }
+        public override void OnCurrentTarget(SignPostEventArgs args) {
+            prevDistance += args.Distance;
+        }
 
         public override bool UpdateSignPost(SignPostEventArgs args)
         {
@@ -274,6 +291,11 @@ namespace ARLocation.MapboxRoutes
             var ArrowContainer = DirectionArrowSettings.Container;
             var MapPinContainer = FinishSignSettings.Container;
             var groundHeight = args.Route.Settings.GroundHeight;
+            if (GameObject.FindWithTag("UI Manager") != null)
+            {
+                GameObject go = GameObject.FindWithTag("UI Manager");
+                uiManager = go.GetComponent<UIManager>();
+            }
 
             var relative = args.TargetPos - args.UserPos;
             relative.y = 0;
@@ -353,6 +375,8 @@ namespace ARLocation.MapboxRoutes
                 if (RoadSignSettings.DistanceLabel != null)
                 {
                     RoadSignSettings.DistanceLabel.text = $"{args.Distance.ToString("0")} m";
+                    Debug.Log(prevDistance);
+                    uiManager.ChangeDistanceTravel(prevDistance - args.Distance);
                 }
 
                 if (RoadSignSettings.DirectionLabel != null)

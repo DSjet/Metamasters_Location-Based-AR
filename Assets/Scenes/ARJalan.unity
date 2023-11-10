@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Settings:
-    LineMaterial: {fileID: 2100000, guid: 697c3d00ed75e4c388f1112e6817fa65, type: 2}
+    LineMaterial: {fileID: 2100000, guid: 9e45ad71639244ac4a6e321d27640079, type: 2}
 --- !u!114 &266481005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Settings:
-    LineMaterial: {fileID: 2100000, guid: 697c3d00ed75e4c388f1112e6817fa65, type: 2}
+    LineMaterial: {fileID: 2100000, guid: 9e45ad71639244ac4a6e321d27640079, type: 2}
     TextureOffsetFactor: -4
 --- !u!1 &431329717
 GameObject:
@@ -1019,7 +1019,20 @@ MonoBehaviour:
         m_MethodName: StartRoute
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 9303e18e870ba2c438b914517bba055e,
+          m_ObjectArgument: {fileID: 11400000, guid: 996da6dd9fe8f5d448904f5dc8da09ff,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: LocationPointScriptableObject, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1543039291}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ChangeWhereToGo
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 996da6dd9fe8f5d448904f5dc8da09ff,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: LocationPointScriptableObject, Assembly-CSharp
           m_IntArgument: 0
@@ -1100,7 +1113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 131, y: -267}
+  m_AnchoredPosition: {x: 122, y: -267}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &925473460
@@ -2053,7 +2066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textDistContainer: {fileID: 2022785866}
-  textPlace: {fileID: 1123338401}
+  textPlace: {fileID: 1123338403}
 --- !u!4 &1543039292
 Transform:
   m_ObjectHideFlags: 0

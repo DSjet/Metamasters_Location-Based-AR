@@ -31,6 +31,8 @@ namespace ARLocation.MapboxRoutes.SampleProject
         public float BaseLineWidth = 2;
         public float MinimapStepSize = 0.5f;
 
+        private UIManager uiManager;
+
         private AbstractRouteRenderer currentPathRenderer => s.LineType == LineType.Route ? RoutePathRenderer : NextTargetPathRenderer;
 
         public LineType PathRendererType
@@ -134,6 +136,11 @@ namespace ARLocation.MapboxRoutes.SampleProject
             RoutePathRenderer.enabled = false;
             ARLocationProvider.Instance.OnEnabled.AddListener(onLocationEnabled);
             Map.OnUpdated += OnMapRedrawn;
+            if (GameObject.FindWithTag("UI Manager") != null)
+            {
+                GameObject go = GameObject.FindWithTag("UI Manager");
+                uiManager = go.GetComponent<UIManager>();
+            }
         }
 
         private void OnMapRedrawn()
@@ -294,7 +301,7 @@ namespace ARLocation.MapboxRoutes.SampleProject
             if (s.destination != null)
             {
                 var api = new MapboxApi(MapboxToken);
-                var loader = new RouteLoader(api);
+                var loader = new RouteLoader(api, true);
                 StartCoroutine(
                         loader.LoadRoute(
                             new RouteWaypoint { Type = RouteWaypointType.UserLocation },
@@ -313,6 +320,8 @@ namespace ARLocation.MapboxRoutes.SampleProject
                                 RouteContainer.SetActive(true);
                                 Camera.gameObject.SetActive(false);
                                 s.View = View.Route;
+
+                                uiManager.InitializeUIDistance(res.routes[0].distance);
 
                                 currentPathRenderer.enabled = true;
                                 MapboxRoute.RoutePathRenderer = currentPathRenderer;
