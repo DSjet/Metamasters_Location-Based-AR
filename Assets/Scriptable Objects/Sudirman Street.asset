@@ -9,12 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 635ca3a89b644ab44b888c22da8eae56, type: 3}
-  m_Name: Mock Location
+  m_Script: {fileID: 11500000, guid: fab17aea93fb39348b517e85917c1c10, type: 3}
+  m_Name: Sudirman Street
   m_EditorClassIdentifier: 
-  Location:
-    Latitude: -6.89067049882851
-    Longitude: 107.61074493068733
+  locationName: Sudirman Street
+  locationQuery: 
+  locationType: 
+  locationDescription: 
+  location:
+    Latitude: 0
+    Longitude: 0
     Altitude: 0
     AltitudeMode: 0
     Label: 
+  locationImage: {fileID: 0}
